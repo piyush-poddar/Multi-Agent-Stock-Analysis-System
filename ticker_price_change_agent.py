@@ -8,6 +8,7 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 MODEL_GEMINI_1_5_FLASH = "gemini-1.5-flash"
 
+# Tool to retrieve the stock price change for a specified ticker symbol over a given number of days
 def get_ticker_price_change(ticker: str, days: int = 7) -> dict:
     """Retrieves the stock price change for a specified ticker symbol over a given number of days.
 
@@ -27,6 +28,7 @@ def get_ticker_price_change(ticker: str, days: int = 7) -> dict:
             time_series = data["Time Series (Daily)"]
             dates = sorted(time_series.keys(), reverse=True)
             if len(dates) >= days:
+                # Get the latest and previous dates and their corresponding prices
                 latest_date = dates[0]
                 previous_date = dates[days - 1]
                 latest_price = float(time_series[latest_date]["4. close"])
@@ -56,7 +58,8 @@ def get_ticker_price_change(ticker: str, days: int = 7) -> dict:
             "status": "error",
             "error_message": f"Failed to retrieve price change information for '{ticker}'."
         }
-    
+
+# Create the agent that retrieves the stock price change for a specified ticker symbol using the get_ticker_price_change tool  
 ticker_price_change = None
 try:
     ticker_price_change = LlmAgent(

@@ -8,6 +8,7 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 MODEL_GEMINI_1_5_FLASH = "gemini-1.5-flash"
 
+# Tool to retrieve the current stock price for a specified ticker symbol
 def get_ticker_price(ticker: str) -> dict:
     """Retrieves the current stock price for a specified ticker symbol.
 
@@ -39,6 +40,7 @@ def get_ticker_price(ticker: str) -> dict:
             "error_message": f"Failed to retrieve price information for '{ticker}'."
         }
     
+# Create the agent that retrieves the current stock price for a specified ticker symbol using the get_ticker_price tool
 ticker_price = None
 try:
     ticker_price = LlmAgent(

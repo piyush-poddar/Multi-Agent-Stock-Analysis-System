@@ -9,12 +9,28 @@ from .ticker_analysis_agent import ticker_analysis
 
 MODEL_GEMINI_1_5_FLASH = "gemini-1.5-flash"
 
+# NOTE:
+# Instead of registering sub-agents using the `sub_agents` parameter, each specialized agent
+# is wrapped as a tool using `AgentTool` and passed to the root agent via the `tools` parameter.
+#
+# Reason:
+# Using sub-agents directly caused the root agent to lose control after delegation.
+# Once a sub-agent was invoked, the conversation flow would remain inside it, and
+# the root agent could not regain control to continue orchestrating or summarizing.
+#
+# Solution:
+# Wrapping sub-agents as tools allows the root agent to invoke them like function calls,
+# retain control of the conversation, and coordinate multiple tools in a single interaction.
+#
+# This design enables proper multi-agent collaboration while preserving modularity.
+
 identify_ticker_tool = agent_tool.AgentTool(agent=identify_ticker)
 ticker_price_tool = agent_tool.AgentTool(agent=ticker_price)
 ticker_price_change_tool = agent_tool.AgentTool(agent=ticker_price_change)
 ticker_news_tool = agent_tool.AgentTool(agent=ticker_news)
 ticker_analysis_tool = agent_tool.AgentTool(agent=ticker_analysis)
 
+# Create the root agent that coordinates the specialized sub-agents
 root_agent = LlmAgent(
     name="stock_analysis_agent",
     model=MODEL_GEMINI_1_5_FLASH,
@@ -43,7 +59,7 @@ root_agent = LlmAgent(
                 "Remember that you can only use these sub-agents for the stock related user queries, do not use any other information or tools outside of these sub-agents."
                 "For anything else, respond appropriately or state you cannot handle it."
                 "NOTE: ALWAYS RETURN BACK TO THE ROOT AGENT AFTER FINALLY COMPLETING THE TASK, SO THAT IT CAN PROVIDE THE FINAL RESPONSE TO THE USER.",
-    #sub_agents=[identify_ticker, ticker_price, ticker_price_change],
+    # sub_agents=[identify_ticker, ticker_price, ticker_price_change],
     tools=[identify_ticker_tool, ticker_price_tool, ticker_price_change_tool, ticker_news_tool, ticker_analysis_tool],
 )
 print(f"Agent '{root_agent.name}' created successfully.")

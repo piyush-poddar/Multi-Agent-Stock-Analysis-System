@@ -9,6 +9,7 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 MODEL_GEMINI_1_5_FLASH = "gemini-1.5-flash"
 
+# Tool to retrieve the latest news articles and price change for a specified ticker symbol
 def get_ticker_analysis(ticker: str, days: int = 7) -> dict:
     """Retrieves the latest news articles and price change for a specified ticker symbol.
 
@@ -27,6 +28,8 @@ def get_ticker_analysis(ticker: str, days: int = 7) -> dict:
         news["news"].pop("ticker")
         price_change.pop("ticker")
         price_change.pop("status")
+        
+        # Amalgamate the results into a single response
         return {
             "status": "success",
             "ticker": ticker,
@@ -39,6 +42,7 @@ def get_ticker_analysis(ticker: str, days: int = 7) -> dict:
             "error_message": f"Failed to retrieve complete analysis for '{ticker}'."
         }
 
+# Create the agent that analyzes stock ticker symbols using the get_ticker_analysis tool
 ticker_analysis = None
 try:
     ticker_analysis = LlmAgent(

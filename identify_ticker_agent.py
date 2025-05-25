@@ -8,6 +8,7 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 MODEL_GEMINI_1_5_FLASH = "gemini-1.5-flash"
 
+# Tool to retrieve stock ticker symbol for a specified company
 def get_ticker(keyword: str) -> dict:
     """Retrieves the stock ticker symbol for a specified company.
 
@@ -40,7 +41,8 @@ def get_ticker(keyword: str) -> dict:
             "status": "error",
             "error_message": f"Failed to retrieve ticker information for '{keyword}'."
         }
-    
+
+# Create the agent that identifies stock ticker symbols using the get_ticker tool
 identify_ticker = None
 try:
     identify_ticker = LlmAgent(

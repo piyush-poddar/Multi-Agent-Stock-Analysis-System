@@ -8,6 +8,7 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 MODEL_GEMINI_1_5_FLASH = "gemini-1.5-flash"
 
+# Tool to retrieve news articles for a specified ticker symbol
 def get_ticker_news(ticker: str) -> dict:
     """Retrieves the latest news articles for a specified ticker symbol.
 
@@ -26,6 +27,8 @@ def get_ticker_news(ticker: str) -> dict:
             news = {"ticker": ticker,
                 "sentiment_score_definition": data.get("sentiment_score_definition", "N/A"),
                 "feed": []}
+            
+            # Limit to the first 15 news articles and extract relevant fields
             for i in range(15):
                 news["feed"].append({
                     "title": data["feed"][i].get("title", "N/A"),
@@ -49,7 +52,8 @@ def get_ticker_news(ticker: str) -> dict:
             "status": "error",
             "error_message": f"Failed to retrieve news information for '{ticker}'."
         }
-    
+
+# Create the agent that retrieves the latest news articles for a specified ticker symbol using the get_ticker_news tool
 ticker_news = None
 try:
     ticker_news = LlmAgent(
