@@ -136,19 +136,19 @@ Then visit: [http://localhost:8080](http://localhost:8080) to start chatting wit
 .
 ├── .env
 ├── __init__.py
-├── agent.py                   # Root agent definition
-├── identify_ticker_agent.py   # Sub-agent: company → ticker
-├── ticker_price_agent.py      # Sub-agent: fetch current stock price
+├── agent.py                     # Root agent definition
+├── identify_ticker_agent.py     # Sub-agent: company → ticker
+├── ticker_price_agent.py        # Sub-agent: fetch current stock price
 ├── ticker_price_change_agent.py # Sub-agent: fetch price change
-├── ticker_news_agent.py       # Sub-agent: fetch latest news
-├── ticker_analysis_agent.py   # Sub-agent: news + price analysis
+├── ticker_news_agent.py         # Sub-agent: fetch latest news
+├── ticker_analysis_agent.py     # Sub-agent: news + price analysis
 ```
 
 ---
 
 ## 📹 Demo Video
 
-🎥 *A short demo video showing sample user queries and system behavior.* (Link Placeholder)
+🎥 [*A short demo video showing sample user queries and system behavior.*](https://drive.google.com/file/d/1AqYQ4f2EWmKlsw8WBOazv4GGWS2e0fQb/view?usp=sharing)
 
 ---
 
