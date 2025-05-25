@@ -11,7 +11,7 @@ This project is a modular, multi-agent system built using **Google Agent Develop
 - 📈 **Price Change Analysis:** Calculates how the price has changed over a specified period.
 - 📰 **News Aggregation:** Collects and summarizes the most recent news related to the stock.
 - 🧠 **Comprehensive Analysis:** Uses both price and news data to explain recent stock performance.
-- ⚡ **Powered by Gemini 1.5 Flash** (via Vertex AI) and fully orchestrated using Google ADK.
+- ⚡ **Powered by Gemini 1.5 Flash** and fully orchestrated using Google ADK.
 
 ---
 
