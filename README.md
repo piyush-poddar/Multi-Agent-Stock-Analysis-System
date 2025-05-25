@@ -29,7 +29,6 @@ Each sub-agent performs a specific task and returns control to the root agent, w
 
 ---
 
----
 ## 🧠 Agent Design Insight
 
 ### Why are sub-agents wrapped as tools instead of traditional ADK sub-agents?
@@ -83,7 +82,7 @@ Seamless multi-step query resolution while maintaining agent-level modularity!
 
 ## 🧪 Example User Queries
 
-- “Why did Tesla stock drop today?”
+- “Why is the current price of Tesla Stock?”
 - “What’s happening with Palantir stock recently?”
 - “How has Nvidia stock changed in the last 7 days?”
 
@@ -96,8 +95,8 @@ The root agent handles each query by calling relevant sub-agents step-by-step an
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/stock-analysis-agent.git
-cd stock-analysis-agent
+git clone https://github.com/piyush-poddar/Multi-Agent-Stock-Analysis-System.git
+cd Multi-Agent-Stock-Analysis-System
 ```
 
 ### 2. Install dependencies
